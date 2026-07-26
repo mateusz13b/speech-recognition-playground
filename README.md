@@ -1,4 +1,4 @@
-# Boltian Voice Commands
+# Voice Commands Recognition
 
 Practice pet-project for voice command recognition in Python.
 
