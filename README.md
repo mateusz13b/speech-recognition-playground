@@ -1,5 +1,7 @@
 # Voice Commands Recognition
 
+Drop a star and share if you find this repo useful. Thanks!
+
 Practice pet-project for voice command recognition in Python.
 
 The project is built around the Google Speech Commands dataset and compares three model families:
