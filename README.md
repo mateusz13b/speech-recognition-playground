@@ -43,7 +43,7 @@ Additional classes used in training:
 Clone the repository:
 
 ```bash
-git clone https://github.com/mateusz13b/speech-recognition-cnn-lstm-speccnn.git
+git clone https://github.com/mateusz13b/speech-recognition-playground.git
 cd speech-recognition-cnn-lstm-speccnn
 ```
 
@@ -310,7 +310,7 @@ In other words, for now the safest real test path is:
 Minimal full pipeline:
 
 ```bash
-git clone https://github.com/mateusz13b/speech-recognition-cnn-lstm-speccnn.git
+git clone https://github.com/mateusz13b/speech-recognition-playground.git
 cd speech-recognition-cnn-lstm-speccnn
 py -3.11 -m venv .venv
 .venv\Scripts\Activate.ps1
