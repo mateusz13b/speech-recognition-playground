@@ -71,6 +71,7 @@ def save_history_plots(history_path: Path, plots_dir: Path, model_name: str) -> 
     epochs = [row["epoch"] for row in history]
     train_loss = [row["train_loss"] for row in history]
     val_loss = [row["val_loss"] for row in history]
+    train_accuracy = [row["train_accuracy"] for row in history]
     val_accuracy = [row["val_accuracy"] for row in history]
 
     fig, ax = plt.subplots(figsize=(7, 4))
@@ -92,6 +93,17 @@ def save_history_plots(history_path: Path, plots_dir: Path, model_name: str) -> 
     ax.legend()
     fig.tight_layout()
     fig.savefig(plots_dir / f"{model_name}_val_accuracy.png", dpi=150)
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(epochs, train_accuracy, label="train accuracy")
+    ax.plot(epochs, val_accuracy, label="val accuracy")
+    ax.set_title(f"Accuracy curves: {model_name}")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel("Accuracy")
+    ax.legend()
+    fig.tight_layout()
+    fig.savefig(plots_dir / f"{model_name}_accuracy.png", dpi=150)
     plt.close(fig)
 
 
