@@ -7,7 +7,7 @@ import random
 
 import numpy as np
 import torch
-from sklearn.metrics import accuracy_score, f1_score, recall_score
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from torch import nn
 from torch.utils.data import DataLoader
 
@@ -54,6 +54,7 @@ class EvalResult:
         self,
         loss: float,
         accuracy: float,
+        precision: float,
         macro_f1: float,
         recall: float,
         y_true: list[int],
@@ -61,6 +62,7 @@ class EvalResult:
     ) -> None:
         self.loss = loss
         self.accuracy = accuracy
+        self.precision = precision
         self.macro_f1 = macro_f1
         self.recall = recall
         self.y_true = y_true
@@ -171,9 +173,10 @@ def evaluate(
 
     avg_loss = total_loss / max(total, 1)
     accuracy = accuracy_score(y_true, y_pred)
+    precision = precision_score(y_true, y_pred, average="macro", zero_division=0)
     macro_f1 = f1_score(y_true, y_pred, average="macro", zero_division=0)
     recall = recall_score(y_true, y_pred, average="macro", zero_division=0)
-    return EvalResult(avg_loss, accuracy, macro_f1, recall, y_true, y_pred)
+    return EvalResult(avg_loss, accuracy, precision, macro_f1, recall, y_true, y_pred)
 
 
 def save_checkpoint(path: str | Path, model: nn.Module, optimizer: torch.optim.Optimizer, epoch: int, metrics: dict[str, float]) -> None:
@@ -249,6 +252,7 @@ def fit_model(
                 "train_accuracy": train_accuracy,
                 "val_loss": val_result.loss,
                 "val_accuracy": val_result.accuracy,
+                "val_precision": val_result.precision,
                 "val_macro_f1": val_result.macro_f1,
                 "val_recall": val_result.recall,
                 "model_name": config.model_name,
