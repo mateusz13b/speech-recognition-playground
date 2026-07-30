@@ -128,6 +128,7 @@ def evaluate_model(
     metrics = {
         "model_name": model_name,
         "accuracy": result.accuracy,
+        "precision": result.precision,
         "recall": result.recall,
         "macro_f1": result.macro_f1,
         "loss": result.loss,
